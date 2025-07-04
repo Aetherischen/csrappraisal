@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -21,6 +21,8 @@ import {
 } from "lucide-react";
 
 export default function Index() {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
   useEffect(() => {
     const handleHashChange = () => {
       if (window.location.hash === "#quote-request") {
@@ -111,27 +113,74 @@ export default function Index() {
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      role: "Homeowner",
+      name: "Brandon Higgins",
       content:
-        "CSR Realty Appraisers provided an accurate, professional appraisal for our refinancing. Albert was thorough and explained everything clearly.",
+        "Al is an expert in the appraisal field and provided such a detailed look into my property. I greatly appreciate his research and quick turnaround time.",
       rating: 5,
     },
     {
-      name: "Mike Chen",
-      role: "Real Estate Attorney",
+      name: "Gina Sarwari",
       content:
-        "CSR is my go-to for all client appraisal needs. Their USPAP-compliant reports are always reliable and well-documented.",
+        "Al Zaccone has consistently demonstrated a high level of professionalism, dedication, and skill throughout. Would recommend 100%.",
       rating: 5,
     },
     {
-      name: "Jennifer Davis",
-      role: "Financial Institution",
+      name: "Musbah Zakkour",
       content:
-        "Excellent service for our lending needs. CSR consistently delivers accurate valuations on time.",
+        "Very glad I chose this company for my appraisal. Al was very helpful; he got the work done quickly and explained everything.",
+      rating: 5,
+    },
+    {
+      name: "Alex Marie",
+      content:
+        "Al is one of the best in the business. He really cares about his clients. I highly recommend him for your appraisal needs!",
+      rating: 5,
+    },
+    {
+      name: "Danielle",
+      content:
+        "Amazing Experience! CSR Realty Appraisers were very friendly, professional and knowledgeable. They made the process very quick and easy.",
+      rating: 5,
+    },
+    {
+      name: "Cihan Unsal",
+      content:
+        "When it comes to property appraisals, you need someone who is knowledgeable and professional. Mr. Zaccone embodies all these qualities and more.",
+      rating: 5,
+    },
+    {
+      name: "Ralph Rossi",
+      content:
+        "Since 1982 I have been in Real Estate and find CSR very professional and fair in pricing. Report came in with much information and value was spot on.",
+      rating: 5,
+    },
+    {
+      name: "Anish Ari",
+      content:
+        "Working with Al from CSR Realty Appraisers was a fantastic experience! His technical knowledge and expertise stood out immediately.",
+      rating: 5,
+    },
+    {
+      name: "TJ Caleca",
+      content:
+        "Al was a pleasure to work with. He has a broad knowledge base and provides a 'family'-like experience to all of his clients.",
+      rating: 5,
+    },
+    {
+      name: "Marina Natovich",
+      content:
+        "I was very satisfied with the professionalism of his service. Al was able to schedule an appointment quickly and was very knowledgeable.",
       rating: 5,
     },
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 3) % testimonials.length);
+    }, 4000); // Change every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -268,30 +317,47 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="text-center">
-                <CardContent className="pt-6">
-                  <div className="flex justify-center mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials
+              .slice(currentTestimonial, currentTestimonial + 3)
+              .map((testimonial, index) => (
+                <div
+                  key={currentTestimonial + index}
+                  className="bg-white rounded-lg p-6 shadow-md"
+                >
+                  <div className="flex justify-center mb-3">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-5 h-5 text-yellow-400 fill-current"
+                        className="w-4 h-4 text-yellow-400 fill-current"
                       />
                     ))}
                   </div>
-                  <p className="text-gray-600 mb-6 italic">
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4 italic">
                     "{testimonial.content}"
                   </p>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">
-                      {testimonial.name}
-                    </h4>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  <h4 className="font-semibold text-gray-900 text-sm">
+                    {testimonial.name}
+                  </h4>
+                </div>
+              ))}
+          </div>
+
+          {/* Carousel indicators */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {Array.from({ length: Math.ceil(testimonials.length / 3) }).map(
+              (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTestimonial(index * 3)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    Math.floor(currentTestimonial / 3) === index
+                      ? "bg-primary"
+                      : "bg-gray-300 hover:bg-gray-400"
+                  }`}
+                />
+              ),
+            )}
           </div>
         </div>
       </section>
