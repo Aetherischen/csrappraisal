@@ -14,10 +14,10 @@ export default function Contact() {
       <Navigation />
 
       <PageHeader
-        badge="Get in Touch"
+        badge="Contact New Jersey's Leading Real Estate Appraisers"
         title="Contact"
-        subtitle="CSR Realty Appraisers"
-        description="Ready to get started? Contact Albert Zaccone and our team of certified appraisers for professional real estate valuation services. Free, confidential consultations available by appointment."
+        subtitle="CSR Realty Appraisers - Wallington, NJ"
+        description="Ready to get started? Contact Albert Zaccone, ASA-certified appraiser, and our team of licensed New Jersey real estate appraisal professionals for residential, commercial, and land property valuation services. Serving Bergen County, Passaic County, Essex County, and all NJ areas. Free, confidential consultations available by appointment."
         variant="gradient"
       />
 
@@ -88,10 +88,13 @@ export default function Contact() {
         <div className="mt-16">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Our Location
+              New Jersey Real Estate Appraisal Office Location
             </h2>
             <p className="text-xl text-gray-600">
-              Serving all of New Jersey from our Wallington office
+              Licensed New Jersey real estate appraisers serving all NJ counties
+              from our Wallington, Bergen County office. Convenient access to
+              Passaic County, Essex County, Morris County, Hudson County, and
+              surrounding areas.
             </p>
           </div>
 
